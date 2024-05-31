@@ -140,7 +140,13 @@ input::placeholder {
     padding: 20px;
     border-radius: 20px;
 }
-
+.output{
+    background-color: #66afe9;
+    border-radius: 10px;
+}
+.output li{
+    list-style: none;
+}
 
 #add-new-content{
     cursor: pointer;
