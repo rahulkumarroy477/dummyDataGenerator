@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const User = require("./schema.js");
-const data = require("./jsonData/data1.json");
+const User = require("../server/schema.js");
+const data = require("../jsonData/data1.json");
 const app = express();
 require("dotenv").config();
 

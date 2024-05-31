@@ -3,11 +3,9 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const User = require("./schema.js");
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-
 require('dotenv').config(); // Load environment variables
 
 const PORT = process.env.PORT || 8000;
-
 const MONGOURL = process.env.MONGO_URL;
 
 mongoose.connect(MONGOURL)
@@ -15,37 +13,34 @@ mongoose.connect(MONGOURL)
     console.log("Database connected");
   }).catch(err => console.log(err));
 
-let dummy_data = [];
-
 const app = express();
 
-// Middleware
 app.use(cors());
 app.use(express.json()); // Use express.json() to parse JSON payloads
 
-
 app.get('/customData', async (req, res) => {
-  const header = req.headers;
-  let data = header.data;   // string
-  console.log(data);
-  data = data.split(",");
-  const users = await getUsers(10);
+  const headers = req.headers;
+  const row = headers.row;
+  let data = headers.data;   // string
+  console.log(row,data);
+  data = data.split(',').join(' '); // get the attribute names
+  const users = await getUsers(row, data);
   return res.status(201).json({
     receivedData: users,
-    status: "Data added",
+    status: "Data retrieved",
   });
 });
 
 app.get('/aiData', async (req, res) => {
-  const header = req.headers;
-  const data = header.data; // Expecting a JSON string in the 'data' header
+  const headers = req.headers;
+  const data = headers.data; // Expecting a JSON string in the 'data' header
 
   console.log("Received data:", data);
   try {
-    await generateData(data);
+    const ai_data = await generateData(data);
     return res.status(201).json({
-      status: "Data added",
-      receivedData: dummy_data
+      status: "Data generated",
+      receivedData: ai_data
     });
   } catch (error) {
     console.error('Error generating AI data:', error);
@@ -56,9 +51,9 @@ app.get('/aiData', async (req, res) => {
   }
 });
 
-
 async function generateData(params) {
   const apiKey = process.env.API_KEY;
+  let dummy_data = [];
   if (!apiKey) {
     throw new Error("Missing API_KEY in .env file");
   }
@@ -67,31 +62,47 @@ async function generateData(params) {
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
   const prompt = `Generate 10 rows of JSON data with attributes: ${params}`;
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 2; i++) {
     try {
       const result = await model.generateContent(prompt);
       const response = await result.response;
-      const text = await response.text();
+      const text = await response.text(); // Ensure this is awaited
 
-      const cleanedText = text.replace(/`/g, '').replace('json', '').trim();
-      const data = JSON.parse(cleanedText);
+      try {
+        const cleanedText = text.replace(/`/g, '').replace('json', '').trim();
+        const data = JSON.parse(cleanedText);
 
-      // Add the generated data to the dummy_data array
-      dummy_data = dummy_data.concat(data);
+        // Add the modified data to the dummy_data array
+        dummy_data = dummy_data.concat(data);
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+        continue;
+      }
+      console.log(`API call ${i + 1} completed`);
 
-      // Log the generated data
-      console.log(data);
     } catch (error) {
-      console.error(error);
+      console.error("Error generating content:", error);
     }
   }
 
+  dummy_data = dummy_data.map((row, index) => {
+    row.id = index + 1; // Ensure unique IDs
+    return row;
+  });
+
+  return dummy_data;
 }
-async function getUsers(count){
-  const users = await User.find().limit(count);
-  console.log(users);
-  return users;
+
+async function getUsers(count, fields) {
+  try {
+    const users = await User.find({},{_id:0}).limit(count).select(fields);
+    return users;
+  } catch (error) {
+    console.error("Error retrieving users:", error);
+    throw error;
+  }
 }
-app.listen(process.env.PORT, () => {
+
+app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });

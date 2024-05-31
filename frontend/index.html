@@ -75,17 +75,20 @@
 
 
         <div id="generator">
-            <!-- <div class="loader" id="loader"></div> -->
             <div id="custom-data">Custom Data</div>
             <div id="ai-data">Generate Data using AI</div>
         </div>
         
         <div id="downloader">
             <div id="filename">result.json
-                <i class="ri-eye-fill"></i>
+                <i class="ri-eye-fill" id="eye-icon"></i>
             </div>
-
+            
             <button id="download-btn">Download</button>
+        </div>
+        <div id="result-box">
+            <div class="loader" id="loader"></div>
+
         </div>
     </div>
     <script src="./javascript/sendRequest.js"></script>
