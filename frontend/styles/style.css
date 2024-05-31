@@ -13,6 +13,7 @@ body {
 }
 
 #main {
+    position: relative;
     height: 100%;
     width: 100%;
     display: flex;
@@ -184,11 +185,14 @@ input::placeholder {
 }
 #custom-data{
     width: 25%;
+    cursor: pointer;
 }
 #ai-data{
     width: 65%;
+    cursor: pointer;
 }
 #downloader{
+    
     min-width: 400px;
     width: 35%;
     padding: 10px;
@@ -213,8 +217,60 @@ input::placeholder {
     color:cornsilk
 }
 #download-btn{
+    font-size: 30px;
+    cursor: pointer;
     height: 30px;
     width: 20%;
     border-radius: 10px;
     font-size: 15px;
 }
+#show-output{
+    display: none;
+    justify-content: space-between;
+    border-radius: 20px;
+    padding: 20px;
+    z-index: 100;
+    position: absolute;
+    height: 90vh;
+    width: 80vw;
+    background-color: #5fb1f5;
+}
+#show-output i{
+    font-size: 40px;
+    text-align: right;
+    
+}
+#output-content{
+    margin-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+#output-text-content{
+    width: 80%;
+    max-height: 80%;
+    overflow-y: scroll;
+}
+#output-text-content::-webkit-scrollbar{
+    display:none;
+}
+.loader {
+    width: fit-content;
+    font-weight: bold;
+    font-family: monospace;
+    white-space: pre;
+    font-size: 30px;
+    line-height: 1.2em;
+    height:1.2em;
+    overflow: hidden;
+  }
+  .loader:before {
+    content:"Loading...\A⌰oading...\A⌰⍜ading...\A⌰⍜⏃ding...\A⌰⍜⏃⎅ing...\A⌰⍜⏃⎅⟟ng...\A⌰⍜⏃⎅⟟⋏g...\A⌰⍜⏃⎅⟟⋏☌...\A⌰⍜⏃⎅⟟⋏☌⟒..\A⌰⍜⏃⎅⟟⋏☌⟒⏁.\A⌰⍜⏃⎅⟟⋏☌⟒⏁⋔"; 
+    white-space: pre;
+    display: inline-block;
+    animation: l39 1s infinite steps(11) alternate;
+  }
+  
+  @keyframes l39 {
+    100%{transform: translateY(-100%)}
+  }

@@ -19,6 +19,7 @@ const personKeys = [
 const addNewRow = document.querySelector("#add-new-content");
 const content = document.querySelector('#content');
 
+
 addNewRow.addEventListener("click", (event) => {
     if (content.children.length < personKeys.length) {
         const newChildElem = document.createElement('div');
@@ -37,22 +38,20 @@ addNewRow.addEventListener("click", (event) => {
 });
 
 // Event delegation for delete buttons
-content.addEventListener("click", function(event) {
+content.addEventListener("click", function (event) {
     if (event.target.classList.contains('ri-delete-bin-line')) {
         const parentElement = event.target.parentElement;
         parentElement.remove();
     }
 });
 
-// Event delegation for dropdown buttons
-content.addEventListener("click", function(event) {
+
+content.addEventListener("click", function (event) {
     if (event.target.classList.contains('ri-expand-up-down-fill')) {
-        // Close all open dropdowns
         document.querySelectorAll(".output").forEach(function (openDropdown) {
             openDropdown.remove();
         });
 
-        // Create the <ul> element with the class 'output'
         const ul = document.createElement("ul");
         ul.className = "output";
 
@@ -82,9 +81,9 @@ content.addEventListener("click", function(event) {
     }
 });
 
-// Event listener to close dropdowns when clicking outside
-document.addEventListener("click", function(event) {
+document.addEventListener("click", function (event) {
     document.querySelectorAll(".output").forEach(function (openDropdown) {
         openDropdown.remove();
     });
 });
+
