@@ -31,7 +31,7 @@ async function handleSubmit(event) {
     const _type = event.target.id === 'custom-data' ? 'customData' : 'aiData';
     try {
         result_box.style.display = "block";
-        const response = await fetch(`https://dummydatagenerator.onrender.com/${_type}`, {
+        const response = await fetch(`http://localhost:8000/${_type}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

@@ -39,12 +39,18 @@ body {
     padding: 15px;
 
     /* Glassmorphism styles */
-    background: rgba(255, 255, 255, 0.2); /* Translucent white background */
-    border-radius: 15px; /* Rounded corners */
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* Soft shadow */
-    backdrop-filter: blur(10px); /* Blur effect */
-    -webkit-backdrop-filter: blur(10px); /* Blur effect for Safari */
-    border: 1px solid rgba(255, 255, 255, 0.3); /* Light border */
+    background: rgba(255, 255, 255, 0.2);
+    /* Translucent white background */
+    border-radius: 15px;
+    /* Rounded corners */
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    /* Soft shadow */
+    backdrop-filter: blur(10px);
+    /* Blur effect */
+    -webkit-backdrop-filter: blur(10px);
+    /* Blur effect for Safari */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    /* Light border */
 }
 
 #header {
@@ -76,43 +82,54 @@ body {
 i {
     width: 30%;
 }
-input{
+
+input {
     background: none;
     color: white;
 }
+
 input::placeholder {
     font-size: 15px;
     color: white;
 }
-#content .box{
+
+#content .box {
     border: 2px solid #ccc;
     padding: 5px;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s, box-shadow 0.3s;
 }
+
 #content .box:focus {
     border-color: #66afe9;
     box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
     outline: none;
 }
 
-.ri-expand-up-down-fill{
+.ri-expand-up-down-fill {
     width: 20px;
 }
+
 #content {
     max-height: 250px;
     margin-top: 20px;
     overflow-y: scroll;
 }
+
 #content::-webkit-scrollbar {
     display: none;
 }
+
 .items {
     margin-top: 15px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.unclickable {
+    pointer-events: none;
+    cursor: default; 
 }
 
 .dropdown {
@@ -121,11 +138,13 @@ input::placeholder {
     justify-content: space-between;
     position: relative;
 }
+
 .ri-delete-bin-line {
     text-align: center;
     font-size: 20px;
     cursor: pointer;
 }
+
 #result-box {
     display: none;
     position: absolute;
@@ -140,15 +159,35 @@ input::placeholder {
     padding: 20px;
     border-radius: 20px;
 }
-.output{
+
+.output {
+    z-index: 100;
+    max-height: 150px;
+    overflow-y: auto; 
+    top: 106%;
+    left: -1%;
+    width: 103%;
+    position: absolute;
     background-color: #66afe9;
-    border-radius: 10px;
-}
-.output li{
-    list-style: none;
+    border-radius: 5px;
+    padding: 10px;
 }
 
-#add-new-content{
+.output li {
+    margin-top: 5px;
+    cursor:pointer;
+    list-style: none;
+    padding: 5px;
+    border-bottom: 2px solid black;
+}
+
+.output::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+#add-new-content {
     cursor: pointer;
     margin-top: 10px;
     width: 100%;
@@ -161,6 +200,7 @@ input::placeholder {
     display: flex;
     align-items: center;
 }
+
 #generator {
     min-width: 400px;
     width: 35%;
@@ -180,15 +220,18 @@ input::placeholder {
     padding: 5px;
     text-align: center;
 }
-#custom-data{
+
+#custom-data {
     width: 25%;
     cursor: pointer;
 }
-#ai-data{
+
+#ai-data {
     width: 65%;
     cursor: pointer;
 }
-#downloader{
+
+#downloader {
     display: none;
     min-width: 400px;
     width: 35%;
@@ -201,18 +244,22 @@ input::placeholder {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     transition: border-color 0.3s, box-shadow 0.3s;
 }
-#filename{
+
+#filename {
     width: 70%;
     font-size: 20px;
 }
-#filename i{
+
+#filename i {
     cursor: pointer;
     margin-left: 15px;
 }
-#filename i:hover{
-    color:cornsilk
+
+#filename i:hover {
+    color: cornsilk
 }
-#download-btn{
+
+#download-btn {
     font-size: 30px;
     cursor: pointer;
     height: 30px;
@@ -220,6 +267,7 @@ input::placeholder {
     border-radius: 10px;
     font-size: 15px;
 }
+
 .loader {
     position: absolute;
     text-align: center;
@@ -229,16 +277,19 @@ input::placeholder {
     white-space: pre;
     font-size: 30px;
     line-height: 1.2em;
-    height:1.2em;
+    height: 1.2em;
     overflow: hidden;
-  }
-  .loader:before {
-    content:"Loading...\A⌰oading...\A⌰⍜ading...\A⌰⍜⏃ding...\A⌰⍜⏃⎅ing...\A⌰⍜⏃⎅⟟ng...\A⌰⍜⏃⎅⟟⋏g...\A⌰⍜⏃⎅⟟⋏☌...\A⌰⍜⏃⎅⟟⋏☌⟒..\A⌰⍜⏃⎅⟟⋏☌⟒⏁.\A⌰⍜⏃⎅⟟⋏☌⟒⏁⋔"; 
+}
+
+.loader:before {
+    content: "Loading...\A⌰oading...\A⌰⍜ading...\A⌰⍜⏃ding...\A⌰⍜⏃⎅ing...\A⌰⍜⏃⎅⟟ng...\A⌰⍜⏃⎅⟟⋏g...\A⌰⍜⏃⎅⟟⋏☌...\A⌰⍜⏃⎅⟟⋏☌⟒..\A⌰⍜⏃⎅⟟⋏☌⟒⏁.\A⌰⍜⏃⎅⟟⋏☌⟒⏁⋔";
     white-space: pre;
     display: inline-block;
     animation: l39 1s infinite steps(11) alternate;
-  }
-  
-  @keyframes l39 {
-    100%{transform: translateY(-100%)}
-  }
+}
+
+@keyframes l39 {
+    100% {
+        transform: translateY(-100%)
+    }
+}
